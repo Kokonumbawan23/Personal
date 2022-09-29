@@ -1,23 +1,22 @@
 var express = require('express');
 var router = express.Router();
+const AuthenticationToken = require('../middleware/AuthToken');
 
 const {
   handlerDeleteUser,
   handlerGetUser,
   handlerGetUserById,
-  handlerPostUser,
-  handlerPutUser
+  handlerPutUser,
 } = require('./handler');
 
 /* GET users listing. */
-router.get('/user', handlerGetUser);
+router.get('/user',AuthenticationToken, handlerGetUser);
 // GET user by id
-router.get('/user/:id', handlerGetUserById);
-// CREATE user
-router.post('/user/',handlerPostUser);
+router.get('/user/:id',AuthenticationToken, handlerGetUserById);
 // EDIT user
-router.put('/user/:id',handlerPutUser);
+router.put('/user/:id',AuthenticationToken,handlerPutUser);
 // DELETE user
-router.delete('/user/:id', handlerDeleteUser);
+router.delete('/user/:id',AuthenticationToken, handlerDeleteUser);
+
 
 module.exports = router;
